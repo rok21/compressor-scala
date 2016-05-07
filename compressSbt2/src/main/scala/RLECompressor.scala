@@ -45,5 +45,16 @@ object RLECompressor extends Compressor{
       compressMain
     }
 
-  override def decompress[A]: (Seq[Compressed[A]]) => Seq[A] = ???
+  override def decompress[A]: (Seq[Compressed[A]]) => Seq[A] = {
+    def compressedToSeq(compressed : Compressed[A]): Seq[A] ={
+      compressed match {
+        case repeat: Repeat[A] =>
+          List.fill(repeat.count)(repeat.element)
+        case _ =>
+          List(compressed.asInstanceOf[Single[A]].element)
+      }
+    }
+
+    (paramSeq) => paramSeq.flatMap(compressedToSeq)
+  }
 }
