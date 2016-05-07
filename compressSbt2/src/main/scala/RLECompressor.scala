@@ -12,6 +12,15 @@ trait Compressor {
 
 object RLECompressor extends Compressor{
     override def compress[A]: (Seq[A]) => Seq[Compressed[A]] = {
+
+      def repeatToCompressed(repeatObj: Repeat[A]) : Compressed[A] = {
+        if(repeatObj.count == 1){
+          new Single[A](repeatObj.element)
+        }else{
+          repeatObj
+        }
+      }
+
       def compressMain(paramSeq : Seq[A]) : Seq[Compressed[A]] = {
         var compressedSeq = List[Compressed[A]]()
         var currentRepeat: Repeat[A] = null
@@ -23,11 +32,7 @@ object RLECompressor extends Compressor{
 
           if (i== (paramSeq.length-1) || !paramSeq(i+1).equals(currentRepeat.element)) {
             //last or next one is different
-            if (currentRepeat.count > 1) {
-              latestCompressed = currentRepeat
-            } else {
-              latestCompressed = new Single[A](currentRepeat.element)
-            }
+            latestCompressed = repeatToCompressed(currentRepeat)
             currentRepeat = null
           }
 
