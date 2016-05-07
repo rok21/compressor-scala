@@ -10,7 +10,7 @@ trait Compressor {
   def decompress[A]: Seq[Compressed[A]] => Seq[A]
 }
 
-object MyCompressor extends Compressor{
+object RLECompressor extends Compressor{
   override def compress[A]: (Seq[A]) => Seq[Compressed[A]] = {
     def compressInner(paramSeq : Seq[A]) : Seq[Compressed[A]] = {
       var compressedSeq = List[Compressed[A]]()

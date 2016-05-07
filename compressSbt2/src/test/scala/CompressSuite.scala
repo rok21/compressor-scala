@@ -8,16 +8,18 @@ import org.scalatest.junit.JUnitRunner
 
 @RunWith(classOf[JUnitRunner])
 class CompressSuite extends FunSuite{
-  import MyCompressor.compress
+  import RLECompressor.compress
 
   test("compress: Single objects only"){
 
-    val result = compress(List(1, 2, 3))
+    val param : Seq[Int] = List(1, 2, 3)
+
+    val result = compress(param)
 
     assert(result.length == 3)
-    for(resultElem <- result){
-      assert(resultElem.isInstanceOf[Compressed])
-
+    for(i <- param.indices){
+      assert(result(i).isInstanceOf[Compressed[Int]])
+      assert(result(i).asInstanceOf[Single[Int]].element.equals(param(i)))
     }
   }
 
