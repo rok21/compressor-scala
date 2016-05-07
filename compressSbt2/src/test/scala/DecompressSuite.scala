@@ -5,6 +5,8 @@ import org.junit.runner.RunWith
 import org.scalatest.FunSuite
 import org.scalatest.junit.JUnitRunner
 
+import com.example.compression.{Repeat, Single, Compressed}
+
 @RunWith(classOf[JUnitRunner])
 class DecompressSuite extends FunSuite {
 
