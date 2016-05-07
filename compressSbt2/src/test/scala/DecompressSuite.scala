@@ -1,6 +1,8 @@
 /**
  * Created by Rokas on 07/05/2016.
  */
+
+import com.mycompressionImpl.RLECompressor
 import org.junit.runner.RunWith
 import org.scalatest.FunSuite
 import org.scalatest.junit.JUnitRunner

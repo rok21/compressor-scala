@@ -1,4 +1,6 @@
-import com.example.compression.{Repeat, Single, Compressed, Compressor}
+package com.mycompressionImpl
+
+import com.example.compression.{Compressed, Compressor, Repeat, Single}
 
 /**
  * Created by Rokas on 07/05/2016.
